@@ -1,5 +1,6 @@
 'use strict';
 const path = require('path');
+const fs = require('fs');
 const _ = require('lodash');
 
 const dirs = require('./dirs');
@@ -43,12 +44,19 @@ module.exports = {
     isDirectory(filePath) {
       filePath = this.makePathAbs(filePath);
       return new Promise((resolve, reject) => {
-        try {
-          var resolved = require.resolve(filePath);
-          resolve(path.dirname(resolved) === _.trimEnd(filePath, '/'));
-        } catch(e) {
-          reject(e);
-        }
+        fs.lstat(filePath, (err, stats) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(stats.isDirectory());
+        });
+        // fs.lstat(path.join(__dirname, 'test', 'build'), (err, stats) => {
+        // try {
+        //   var resolved = require.resolve(filePath);
+        //   resolve(path.dirname(resolved) === _.trimEnd(filePath, '/'));
+        // } catch(e) {
+        //   reject(e);
+        // }
       });
     }
 }

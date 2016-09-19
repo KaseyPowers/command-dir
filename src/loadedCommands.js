@@ -125,8 +125,13 @@ function buildCommand(cmd, cmdKey) {
   var output = {
     description: cmd.description,
     hidden: cmd.hidden,
-    subCommands: cmd.subCommands || {}
+    subCommands: {}
   };
+  if (cmd.subCommands) {
+    _.forEach(cmd.subCommands, (value, key) => {
+      output.subCommands[key] = buildCommand(value, key);
+    });
+  }
   if (!_.isUndefined(cmd.cmd)) {
     output.cmd = cmd.cmd;
   } else if (_.isFunction(cmd)) {

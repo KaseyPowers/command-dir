@@ -45,6 +45,7 @@ module.exports = {
       if (cmdToRun) {
         return Promise.resolve(utils.runMaybeFunction(cmdToRun.cmd));
       }
+      return Promise.resolve();
     });
   }
 }

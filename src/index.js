@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const loadedCommands = require('./loadedCommands');
 const runner = require('./runner');
 const dirs = require('./dirs');
 
