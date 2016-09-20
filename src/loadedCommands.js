@@ -139,10 +139,10 @@ function buildCommand(cmd, cmdKey) {
   }
   _.forEach(cmd, (value, key) => {
     if (_.includes(['pre', 'pre'+cmdKey], key)) {
-      ouput.pre = buildCommand(cmd);
+      output.pre = buildCommand(value);
     }
     if (_.includes(['post', 'post'+cmdKey], key)) {
-      ouput.post = buildCommand(cmd);
+      output.post = buildCommand(value);
     }
   });
   return output;
