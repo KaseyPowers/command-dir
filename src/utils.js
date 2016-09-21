@@ -47,8 +47,9 @@ module.exports = {
         fs.lstat(filePath, (err, stats) => {
           if (err) {
             reject(err);
+          } else {
+            resolve(stats.isDirectory());
           }
-          resolve(stats.isDirectory());
         });
         // fs.lstat(path.join(__dirname, 'test', 'build'), (err, stats) => {
         // try {

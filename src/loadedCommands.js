@@ -1,6 +1,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const pathExists = require('path-exists');
 const _ = require('lodash');
 const globby = require('globby');
 
@@ -79,7 +80,7 @@ function startReadIn() {
 
 function _readIn(input) {
   var filePath = utils.makePathAbs(input);
-  if (!isLoaded(filePath)) {
+  if (!isLoaded(filePath) && pathExists.sync(filePath)) {
       return utils.isDirectory(filePath)
       .then(isDir => {
         return (isDir ? readDir : readFile)(filePath);

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KaseyPowers/command-dir#readme",
   "dependencies": {
+    "path-exists": "^3.0.0",
     "vorpal": "^1.11.4"
   }
 }

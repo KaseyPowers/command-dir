@@ -30,7 +30,10 @@ function buildCommands() {
       currentCommands = _.reduce(toBuild, (output, value, key) => {
         output.subCommands[key] = _.reduceRight(value, (toMerge, cmdPath) => {
           var cmdObj = loadedCommands.findInStruct(cmdPath);
-          return mergeCommands(toMerge, buildCommandObj(cmdObj, key));
+          if (cmdObj) {
+            return mergeCommands(toMerge, buildCommandObj(cmdObj, key));
+          }
+          return toMerge;
         }, {});
         return output;
       }, {subCommands: {}});
