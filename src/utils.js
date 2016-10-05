@@ -16,12 +16,13 @@ module.exports = {
         return _.concat(output, _.trim(next));
       }, []);
     },
-    runMaybeFunction(fn) {
-      return _.isFunction(fn) ? fn.apply(this, Array.prototype.slice.call(arguments, 1)) : fn;
+    runMaybeFunction(fn, ...args) {
+      return _.isFunction(fn) ? fn.apply(this, ...args) : fn;
     },
-    prepareFunction(fn) {
+    prepareFunction(fn, ...args) {
       return () => {
-        return this.runMaybeFunction(fn, ...Array.prototype.slice.call(arguments, 1));
+        return this.runMaybeFunction(fn, ...args);
+        // return this.runMaybeFunction(fn, ...Array.prototype.slice.call(arguments, 1));
       }
     },
     runArray(functions) {
